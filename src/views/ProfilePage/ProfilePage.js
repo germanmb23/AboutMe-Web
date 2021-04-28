@@ -96,7 +96,11 @@ export default function ProfilePage(props) {
     return portfolioData.map((proyect) => (
       <GridItem xs={12} sm={12} md={12}>
         <CardContent>
-          <div target="_blank" onClick={() => window.open(proyect.link)}>
+          <div
+            style={{ cursor: "pointer" }}
+            target="_blank"
+            onClick={() => window.open(proyect.link)}
+          >
             <div>
               <GitHub style={{ paddingRight: 8 }} />
               <Typography variant="h9" className={classes.title}>
