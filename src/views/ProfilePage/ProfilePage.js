@@ -159,14 +159,14 @@ export default function ProfilePage(props) {
               </GridItem>
             </GridContainer>
             <div className={classes.description}>
-              <p style={{ fontSize: "17px" }}>
+              <p style={{ fontSize: "18px" }}>
                 I'm a software developer, focused in frontend with some
                 experience in back end. I am also sutying computer engineering
                 in "Facultad de Ingenieria, UDELAR".
               </p>
 
-              <p style={{ fontSize: "17px" }}>
-                I'm highly interested in the frontend and the user experience
+              <p style={{ fontSize: "18px" }}>
+                I'm mainly interested in the frontend and the user experience
                 and design in general. I'm a natural challenge lover, I don't
                 give up that easy.
               </p>
@@ -232,7 +232,7 @@ export default function ProfilePage(props) {
                           <GridItem xs={12} sm={12} md={4}>
                             <div>
                               <p
-                                style={{ fontSize: "17px" }}
+                                style={{ fontSize: "19px" }}
                                 className={classes.description}
                               >
                                 I'm a self motivated learner, passionate for
@@ -241,14 +241,15 @@ export default function ProfilePage(props) {
                                 practices.
                               </p>
                               <p
-                                style={{ fontSize: "17px" }}
+                                style={{ fontSize: "19px" }}
                                 className={classes.description}
                               >
-                                Currently getting my hands dirty with AWS,
-                                studing and getting the certificates of
-                                attendance from AWS free webinars 2020.
+                                I'm a self-driven learner of front-end
+                                frameworks. 'm always trying to push my self out
+                                of my comfort zone by learning new technologies
+                                and I always keep maintenance as well as quality
+                                in everything I do.
                               </p>
-
                               <br />
                             </div>
                           </GridItem>
@@ -262,14 +263,11 @@ export default function ProfilePage(props) {
                         <GridContainer justify="center">
                           <GridItem xs={24} sm={24} md={24}>
                             <p
-                              style={{ fontSize: "17px" }}
+                              style={{ fontSize: "19px" }}
                               className={classes.description}
                             >
                               This are just some little projects to show my
-                              style of coding, I'm also building a personal
-                              project with Antdesign Pro + NodeJs + Firebase,
-                              for intellectual reasons is not in public
-                              repository, available to show in case needed.
+                              style of coding.
                             </p>
                           </GridItem>
                           <List dense={dense}>
