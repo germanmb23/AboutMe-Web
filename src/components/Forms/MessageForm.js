@@ -23,13 +23,10 @@ class NameForm extends React.Component {
   }
 
   handleSubmit(event) {
-    const mail = this.state.mail;
-    const mailBody = this.state.message;
-    sendMail({ mail, mailBody });
-    alert("Mail sent!");
-    // if (sendMail(this.state.mail, this.state.message)) alert("Mail sent!");
-    // else alert("There was an error :(");
-
+    if (sendMail({ mail: this.state.mail, mailBody: this.state.message }))
+      alert("Mail sent!");
+    else alert("There was an error :(");
+    this.setState({ mail: "", message: "" });
     event.preventDefault();
   }
 
@@ -37,20 +34,31 @@ class NameForm extends React.Component {
     return (
       <div style={{ flexDirection: "column" }}>
         <form onSubmit={this.handleSubmit}>
-          <h2 style={{ marginTop: "30px" }}>Contact Me</h2>
-          <p>Enter your mail:</p>
+          <h2 style={{ marginTop: "20px" }}>
+            {this.props.language == "spanish" ? "Contactame" : "Contact Me"}
+          </h2>
+
+          <p>
+            {this.props.language == "spanish"
+              ? "Ingresa tu email: "
+              : "Enter your email:"}
+          </p>
 
           <input
             type="email"
             required
-            value={this.state.value}
+            value={this.state.mail}
             onChange={this.handleChangeMail}
           />
-          <p>Enter your message:</p>
+          <p style={{ marginTop: "10px" }}>
+            {this.props.language == "spanish"
+              ? "Ingresa tu mensaje: "
+              : "Enter your message:"}
+          </p>
           <input
             type="text"
             required
-            value={this.state.value}
+            value={this.state.message}
             onChange={this.handleChangeMessage}
           />
           <div style={{ position: "relative", marginTop: "10px" }}>
@@ -61,7 +69,9 @@ class NameForm extends React.Component {
               color="default"
               startIcon={<EmailIcon />}
             >
-              Send Message
+              {this.props.language == "spanish"
+                ? "Enviar Mensaje"
+                : "Send Message"}
             </Button>
           </div>
         </form>

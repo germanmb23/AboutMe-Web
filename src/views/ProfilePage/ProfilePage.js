@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React from "react";
+import React, { useState } from "react";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // @material-ui/core components
@@ -24,11 +24,21 @@ import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import NavPills from "components/NavPills/NavPills.js";
 import Parallax from "components/Parallax/Parallax.js";
+import ToggleButtons from "components/Parallax/ToggleButtons.js";
+import * as constants from "./../../constants";
+/*
+I'm a software developer, focused in frontend with some experience in backend. I am also studying computer engineering in "Facultad de Ingenieria, UDELAR".
+
+I'm mainly interested in the frontend and the user experience and design in general but I enjoy also working on backend. I'm a natural challenge lover, I don't give up that easy.
+
+Below, you can see some of my skills, and some of my last progects I have worked, also you can contact me sending me a message.
+ */
+
 // images
 import profile from "assets/img/faces/me.png";
 import coding from "assets/img/coding.png";
 
-import NameForm from "components/Forms/MessageForm";
+import MessageForm from "components/Forms/MessageForm";
 
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
 
@@ -37,51 +47,19 @@ import pdf from "../../assets/files/my_resume.pdf";
 const useStyles = makeStyles(styles);
 
 export default function ProfilePage(props) {
+  //true=spanish, false=english
+  const [language, setLanguage] = useState("spanish");
+
   const githubLink = "https://github.com/germanmb23/";
-
-  const portfolioData = [
-    {
-      name: "This Webpage",
-      link: "https://github.com/germanmb23/AboutMe-Web",
-      stack: "ReactJs + Material UI + Firebase Hosting",
-    },
-    {
-      name: "e-Comerce",
-      link: "https://github.com/germanmb23/ObligatorioJAP",
-      stack: "Javascript + Bootsrap",
-    },
-    {
-      name: "Pesonal Mobile App",
-      link: "https://github.com/germanmb23/AboutMe",
-      stack:
-        "React Native + UseState + Formik + Material UI + Navigation... etc",
-    },
-  ];
-
-  const frontEndData = [
-    "React",
-    "Typescript",
-    "Javascript",
-    "Npm/Yarn",
-    "Redux",
-    "HTML",
-    "CSS",
-    "Bootstrap",
-    "Semantic UI/Material UI/Antdesign",
-  ];
-  const backEndData = [
-    "NodeJs",
-    "ExpressJs",
-    "Rest Web Services",
-    "C/C++",
-    "Java",
-  ];
-  const dataBaseData = ["PostgreSql"];
-  const organizationData = ["Agile", "Scrum", "Git Flow"];
 
   const classes = useStyles();
 
   const [dense, setDense] = React.useState(false);
+
+  const changeLanguage = () => {
+    if (language == "spanish") setLanguage("english");
+    else setLanguage("spanish");
+  };
 
   const { ...rest } = props;
   const imageClasses = classNames(
@@ -111,7 +89,14 @@ export default function ProfilePage(props) {
           </div>
 
           {"e-Comerce" == proyect.name ? (
-            <a href="https://germanmb23.github.io/ObligatorioJAP/">Web Site</a>
+            <div>
+              <p>
+                <b>Nota:</b> Ingresar cualquier usuario y contraseña
+              </p>
+              <a href="https://germanmb23.github.io/ObligatorioJAP/">
+                Web Site
+              </a>
+            </div>
           ) : (
             ""
           )}
@@ -145,7 +130,9 @@ export default function ProfilePage(props) {
                   </div>
                   <div className={classes.name}>
                     <h3 className={classes.title}>German Moreira</h3>
-                    <h6>DEVELOPER</h6>
+                    <h6>
+                      {language == "spanish" ? "DESARROLLADOR" : "DEVELOPER"}
+                    </h6>
                     <Button
                       justIcon
                       link
@@ -159,17 +146,10 @@ export default function ProfilePage(props) {
               </GridItem>
             </GridContainer>
             <div className={classes.description}>
-              <p style={{ fontSize: "18px" }}>
-                I'm a software developer, focused in frontend with some
-                experience in back end. I am also sutying computer engineering
-                in "Facultad de Ingenieria, UDELAR".
-              </p>
-
-              <p style={{ fontSize: "18px" }}>
-                I'm mainly interested in the frontend and the user experience
-                and design in general. I'm a natural challenge lover, I don't
-                give up that easy.
-              </p>
+              <ToggleButtons onSelect={changeLanguage} />
+              {constants.aboutMe[language].map((element) => {
+                return <p style={{ fontSize: "18px" }}>{element}</p>;
+              })}
               <div style={{ marginTop: "30px" }}>
                 <Button
                   variant="contained"
@@ -178,10 +158,12 @@ export default function ProfilePage(props) {
                   startIcon={<CloudDownloadIcon />}
                   onClick={() => window.open(pdf)}
                 >
-                  Download my resume
+                  {language == "spanish"
+                    ? "Descargar curriculum"
+                    : "Download my resume"}
                 </Button>
               </div>
-              <NameForm></NameForm>
+              <MessageForm language={language} />
             </div>
 
             <GridContainer justify="center">
@@ -199,26 +181,34 @@ export default function ProfilePage(props) {
                             <Typography variant="h9" className={classes.title}>
                               BackEnd
                             </Typography>
-                            <List dense={dense}>{generate(backEndData)}</List>
+                            <List dense={dense}>
+                              {generate(constants.backEndData)}
+                            </List>
                           </GridItem>
                           <GridItem xs={24} sm={24} md={3}>
                             <Typography variant="h9" className={classes.title}>
                               FrontEnd
                             </Typography>
-                            <List dense={dense}>{generate(frontEndData)}</List>
+                            <List dense={dense}>
+                              {generate(constants.frontEndData)}
+                            </List>
                           </GridItem>
                           <GridItem xs={24} sm={24} md={3}>
                             <Typography variant="h9" className={classes.title}>
-                              DataBase
-                            </Typography>
-                            <List dense={dense}>{generate(dataBaseData)}</List>
-                          </GridItem>
-                          <GridItem xs={24} sm={24} md={3}>
-                            <Typography variant="h9" className={classes.title}>
-                              Organization
+                              {language == "spanish"
+                                ? "Base de Datos"
+                                : "DataBase"}
                             </Typography>
                             <List dense={dense}>
-                              {generate(organizationData)}
+                              {generate(constants.dataBaseData)}
+                            </List>
+                          </GridItem>
+                          <GridItem xs={24} sm={24} md={3}>
+                            <Typography variant="h9" className={classes.title}>
+                              Frameworks
+                            </Typography>
+                            <List dense={dense}>
+                              {generate(constants.organizationData)}
                             </List>
                           </GridItem>
                         </GridContainer>
@@ -231,25 +221,16 @@ export default function ProfilePage(props) {
                         <GridContainer justify="center">
                           <GridItem xs={12} sm={12} md={4}>
                             <div>
-                              <p
-                                style={{ fontSize: "19px" }}
-                                className={classes.description}
-                              >
-                                I'm a self motivated learner, passionate for
-                                code. I believe in the art of code, developing
-                                scalable and maintainable code following best
-                                practices.
-                              </p>
-                              <p
-                                style={{ fontSize: "19px" }}
-                                className={classes.description}
-                              >
-                                I'm a self-driven learner of front-end
-                                frameworks. 'm always trying to push my self out
-                                of my comfort zone by learning new technologies
-                                and I always keep maintenance as well as quality
-                                in everything I do.
-                              </p>
+                              {constants.workInfo[language].map((element) => {
+                                return (
+                                  <p
+                                    style={{ fontSize: "19px" }}
+                                    className={classes.description}
+                                  >
+                                    {element}
+                                  </p>
+                                );
+                              })}
                               <br />
                             </div>
                           </GridItem>
@@ -271,7 +252,7 @@ export default function ProfilePage(props) {
                             </p>
                           </GridItem>
                           <List dense={dense}>
-                            {generatePorfolio(portfolioData)}
+                            {generatePorfolio(constants.portfolioData)}
                           </List>
                           {
                             <p float="center">
@@ -305,7 +286,11 @@ export default function ProfilePage(props) {
                                   )
                                 }
                               >
-                                <div>
+                                <div
+                                  style={{
+                                    cursor: "pointer",
+                                  }}
+                                >
                                   <GitHub style={{ paddingRight: 8 }} />
                                   <Typography
                                     variant="h9"
@@ -336,6 +321,69 @@ export default function ProfilePage(props) {
                                     <img
                                       src="https://user-images.githubusercontent.com/32777967/116443402-fb68b180-a829-11eb-8a2c-f38570bd4933.jpeg"
                                       width="23%"
+                                    />
+                                  </p>
+                                }
+                              </div>
+                            </CardContent>
+                            <CardContent>
+                              <div
+                                target="_blank"
+                                onClick={() =>
+                                  window.open(
+                                    "https://github.com/germanmb23/ReactNative_DoneWithIt"
+                                  )
+                                }
+                              >
+                                <div
+                                  style={{
+                                    cursor: "pointer",
+                                  }}
+                                >
+                                  <GitHub
+                                    style={{
+                                      paddingRight: 8,
+                                    }}
+                                  />
+                                  <Typography
+                                    variant="h9"
+                                    className={classes.title}
+                                  >
+                                    {"Aplicacion para controlar el robot butiá"}
+                                  </Typography>
+                                </div>
+                                <p as="a">
+                                  {
+                                    "React Native + UseState + Formik + Material UI + Navigation... etc"
+                                  }
+                                </p>
+                                {
+                                  <p float="center">
+                                    <img
+                                      src="https://user-images.githubusercontent.com/32777967/128830238-8816ef81-138a-442b-981d-ba1dd43b605e.gif"
+                                      width="33%"
+                                    />
+                                    <img
+                                      src="https://user-images.githubusercontent.com/32777967/128830221-05ccab86-7a7d-4f55-83b8-3d8aee05515b.gif"
+                                      width="33%"
+                                    />
+                                    <img
+                                      src="https://user-images.githubusercontent.com/32777967/128830254-b12a2091-232f-4b6c-b551-0196bcf0c8f1.gif"
+                                      width="33%"
+                                    />
+                                    <br />
+                                    <br />
+                                    <img
+                                      src="https://user-images.githubusercontent.com/32777967/128830231-6162d353-f1ac-47d9-9352-6974352dc192.gif"
+                                      width="33%"
+                                    />
+                                    <img
+                                      src="https://user-images.githubusercontent.com/32777967/128830240-fa0729c0-5468-4aad-a44b-85bf134f662b.gif"
+                                      width="33%"
+                                    />
+                                    <img
+                                      src="https://user-images.githubusercontent.com/32777967/128830247-ec3a44f0-c05f-491a-a814-f21a6cd62081.gif"
+                                      width="33%"
                                     />
                                   </p>
                                 }
