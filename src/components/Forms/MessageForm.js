@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Button from "components/CustomButtons/Button.js";
 import EmailIcon from "@material-ui/icons/Email";
-import { sendMail } from "components/api/sendMessage";
+import { sendMail } from "../../api/sendMessage";
 
 class NameForm extends React.Component {
   constructor(props) {
@@ -32,7 +32,13 @@ class NameForm extends React.Component {
 
   render() {
     return (
-      <div style={{ flexDirection: "column" }}>
+      <div
+        style={{
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
         <form onSubmit={this.handleSubmit}>
           <h2 style={{ marginTop: "20px" }}>
             {this.props.language == "spanish" ? "Contactame" : "Contact Me"}
@@ -45,6 +51,7 @@ class NameForm extends React.Component {
           </p>
 
           <input
+            style={{ width: "35%" }}
             type="email"
             required
             value={this.state.mail}
@@ -55,9 +62,8 @@ class NameForm extends React.Component {
               ? "Ingresa tu mensaje: "
               : "Enter your message:"}
           </p>
-          <input
-            type="text"
-            required
+          <textarea
+            style={{ width: "35%", height: "65px" }}
             value={this.state.message}
             onChange={this.handleChangeMessage}
           />
