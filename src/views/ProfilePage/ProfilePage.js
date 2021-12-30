@@ -355,6 +355,11 @@ export default function ProfilePage(props) {
 																	<Typography variant="h9" className={classes.title}>
 																		{'Aplicacion para controlar el robot butiá'}
 																	</Typography>
+																	<div>
+																		<a href="http://164.73.124.35/inco/proyectos/butia/mediawiki/index.php/Programando_el_Butia_desde_el_celular">
+																			Link al proyecto
+																		</a>
+																	</div>
 																</div>
 																<p as="a">{'React Native + Formik + Material UI + Navigation... etc'}</p>
 																{
